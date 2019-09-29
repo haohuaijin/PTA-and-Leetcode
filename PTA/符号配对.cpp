@@ -3,81 +3,81 @@
 #include <stdlib.h>
 
 /**
- * Õ»´øÓĞÍ·½áµã 
+ * æ ˆå¸¦æœ‰å¤´ç»“ç‚¹ 
  */
 
-//´´½¨Õ» 
+//åˆ›å»ºæ ˆ 
 typedef struct Node *Stack;
 struct Node{
 	char Str;
 	Stack Next;
 };
-//²Ù×÷ 
-Stack CreateStack(); //´´½¨½Úµã
-void Push(Stack ptr,char s); //ÈëÕ» 
-char Pop(Stack ptr); //³öÕ» 
-int IsEmpty(Stack p); //ÅĞ¶ÏÊÇ²»ÊÇ¿ÕµÄ 
-void prepro(char *q,char *prep); //Ô¤´¦Àí 
-char Look(Stack ptr); //²é¿´Õ»¶¥ÔªËØ 
-char *ReadStr(); //¶ÁÈëÊı¾İ 
+//æ“ä½œ 
+Stack CreateStack(); //åˆ›å»ºèŠ‚ç‚¹
+void Push(Stack ptr,char s); //å…¥æ ˆ 
+char Pop(Stack ptr); //å‡ºæ ˆ 
+int IsEmpty(Stack p); //åˆ¤æ–­æ˜¯ä¸æ˜¯ç©ºçš„ 
+void prepro(char *q,char *prep); //é¢„å¤„ç† 
+char Look(Stack ptr); //æŸ¥çœ‹æ ˆé¡¶å…ƒç´  
+char *ReadStr(); //è¯»å…¥æ•°æ® 
 
 int main()
 {
 	Stack p;
-	char temp; //ÓÃÀ´½ÓÊÕPop 
+	char temp; //ç”¨æ¥æ¥æ”¶Pop 
 	p = CreateStack();
 //	char S[1000] = "void test(){int i, A[10];for (i=0; i<10;i++)/**/A[i] = i}.";
-	char prep[200] = {0}; //Ô¤´¦Àí×Ö·û´® 
+	char prep[200] = {0}; //é¢„å¤„ç†å­—ç¬¦ä¸² 
 	char *S;
 	S = ReadStr(); 
 	prepro(S,prep); 
 //	printf("%s\n",prep);
 	char *q = prep;
-	//ÅĞ¶Ï´íÎó 
+	//åˆ¤æ–­é”™è¯¯ 
 	while(*q)
 	{
-		if(*q == '(' || *q == '{' || *q == '[' ){	//ÈëÕ» 
+		if(*q == '(' || *q == '{' || *q == '[' ){	//å…¥æ ˆ 
 			Push(p,*q);
 			q++;
 			continue;
-		} else if(*q == '/' && *(q+1) == '*'){	//´¦Àí/* 
+		} else if(*q == '/' && *(q+1) == '*'){	//å¤„ç†/* 
 			Push(p,'/');
-			q = q+2; //¿ÉÄÜÔ½½ç 
+			q = q+2; //å¯èƒ½è¶Šç•Œ 
 			continue;
-		} else if(*q == ')'){	//´¦Àí ) 
+		} else if(*q == ')'){	//å¤„ç† ) 
 			temp = Look(p);
 			if(temp == '0') {printf("NO\n?-)\n");return 0;}
 			if(temp == '(') {Pop(p);}
 			else {printf("NO\n%c-?\n",temp);return 0;} 
 			q++;
 			continue;
-		} else if(*q == ']'){	//´¦Àí ] 
+		} else if(*q == ']'){	//å¤„ç† ] 
 			temp = Look(p);
 			if(temp == '0') {printf("NO\n?-]\n");return 0;}
 			if(temp == '[') {Pop(p);}
 			else {printf("NO\n%c-?\n",temp);return 0;} 
 			q++;
 			continue;
-		} else if(*q == '}'){	//´¦Àí } 
+		} else if(*q == '}'){	//å¤„ç† } 
 			temp = Look(p);
 			if(temp == '0') {printf("NO\n?-}\n");return 0;}
 			if(temp == '{') {Pop(p);}
 			else {printf("NO\n%c-?\n",temp);return 0;} 
 			q++;
 			continue;
-		} else if(*q == '*' && *(q+1) == '/'){	//´¦Àí */ 
+		} else if(*q == '*' && *(q+1) == '/'){	//å¤„ç† */ 
 			temp = Look(p);
 			if(temp == '0') {printf("NO\n?-*/\n");return 0;}
 			if(temp == '/') {Pop(p);}
 			else {printf("NO\n%c-?\n",temp);return 0;} 
 			q = q+2;
 			continue;
-		} else if(*q == '/' && *(q-1) == '*'){	//´¦Àí /*/ 
+		} else if(*q == '/' && *(q-1) == '*'){	//å¤„ç† /*/ 
 			printf("NO\n/*-?\n");
 			return 0;
 		} else {q++;continue;}
 	}
-	//ÓÃÀ´ÅĞ¶Ï£¬Åä¶ÔÍêºóÕ»ÊÇ²»ÊÇ¿ÕµÄ 
+	//ç”¨æ¥åˆ¤æ–­ï¼Œé…å¯¹å®Œåæ ˆæ˜¯ä¸æ˜¯ç©ºçš„ 
 	if(!IsEmpty(p)){
 		while(p->Next != NULL)
 		{
@@ -89,7 +89,7 @@ int main()
 	return 0;
 } 
 
-//´´½¨½áµã 
+//åˆ›å»ºç»“ç‚¹ 
 Stack CreateStack()
 {
 	Stack p;
@@ -99,7 +99,7 @@ Stack CreateStack()
 	return p;
 }
 
-//ÈëÕ» 
+//å…¥æ ˆ 
 void Push(Stack ptr,char s)
 {
 	Stack p;
@@ -109,11 +109,11 @@ void Push(Stack ptr,char s)
 	ptr->Next = p;
 }
  
-//³öÕ» 
+//å‡ºæ ˆ 
 char Pop(Stack ptr)
 {
 	char s;
-	if(IsEmpty(ptr)) return '0'; //·µ»ØÖµ 
+	if(IsEmpty(ptr)) return '0'; //è¿”å›å€¼ 
 	Stack p = ptr->Next;
 	s = p->Str;
 	ptr->Next = p->Next;
@@ -121,19 +121,19 @@ char Pop(Stack ptr)
 	return s;
 }
 
-//ÅĞ¶ÏÊÇ²»ÊÇ¿ÕµÄ 
+//åˆ¤æ–­æ˜¯ä¸æ˜¯ç©ºçš„ 
 int IsEmpty(Stack p)
 {
 	return (p->Next == NULL); 
 } 
 
-//Ô¤´¦Àí 
+//é¢„å¤„ç† 
 void prepro(char *S,char *prep)
 {
 	char temp_prep[200];
 	char *q = S;
 	char temp[2] = "1";
-	while(*q) //½«ÎŞ¹ØµÄ×Ö·ûÈ¥³ı 
+	while(*q) //å°†æ— å…³çš„å­—ç¬¦å»é™¤ 
 	{
 		if(*q == '(' || *q == ')'   || *q == '{'|| *q == '}' || \
 			*q == '[' || *q == ']' || *q == '/'|| *q == '*')
@@ -144,9 +144,9 @@ void prepro(char *S,char *prep)
 		q++;
 	}
 	q = temp_prep;
-	while(*q) //½«*´ú±í³Ë·¨µÄÈ¥³ı 
+	while(*q) //å°†*ä»£è¡¨ä¹˜æ³•çš„å»é™¤ 
 	{
-		if(*q == '*' && *(q-1) == '*' && *(q+1) == '*') q++; //´¦Àí/***/ ´¦Àí²»ÁË/****/ 
+		if(*q == '*' && *(q-1) == '*' && *(q+1) == '*') q++; //å¤„ç†/***/ å¤„ç†ä¸äº†/****/ 
 		if(*q == '*' && (*(q-1) == '/' || *(q-1) == '*') && (*(q+1) == '/' || *(q+1) == '*'))
 		{
 			temp[0] = *q;
@@ -164,12 +164,12 @@ void prepro(char *S,char *prep)
 
 char Look(Stack ptr)
 {
-	if(IsEmpty(ptr)) return '0'; //·µ»ØÖµ 
+	if(IsEmpty(ptr)) return '0'; //è¿”å›å€¼ 
 	Stack p = ptr->Next;
 	return p->Str;
 } 
 
-//¶ÁÈëÊı¾İ
+//è¯»å…¥æ•°æ®
 char *ReadStr()
 {
 	char *Str;
@@ -181,7 +181,7 @@ char *ReadStr()
 	{
 	    c = getchar();
 		Str[i++] = c;
-		//Str[i-2]×¢ÒâÏÂ±êµÄÅĞ¶Ï 
+		//Str[i-2]æ³¨æ„ä¸‹æ ‡çš„åˆ¤æ–­ 
 		if(c == '\n' && Str[i-2] == '.')
 		{
 			break;
