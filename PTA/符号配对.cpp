@@ -26,12 +26,12 @@ int main()
 	Stack p;
 	char temp; //用来接收Pop 
 	p = CreateStack();
-//	char S[1000] = "void test(){int i, A[10];for (i=0; i<10;i++)/**/A[i] = i}.";
+//	char S[1000] = "*/";
 	char prep[200] = {0}; //预处理字符串 
 	char *S;
 	S = ReadStr(); 
 	prepro(S,prep); 
-//	printf("%s\n",prep);
+	printf("%s\n",prep);
 	char *q = prep;
 	//判断错误 
 	while(*q)
@@ -146,8 +146,13 @@ void prepro(char *S,char *prep)
 	q = temp_prep;
 	while(*q) //将*代表乘法的去除 
 	{
-		if(*q == '*' && *(q-1) == '*' && *(q+1) == '*') q++; //处理/***/ 处理不了/****/ 
+		if(*q == '*' && *(q-1) == '*' && *(q+1) == '*') q++; 
 		if(*q == '*' && (*(q-1) == '/' || *(q-1) == '*') && (*(q+1) == '/' || *(q+1) == '*'))
+		{
+			temp[0] = *q;
+			strncat(prep,temp,1);
+		}
+		else if(*q == '*' && (*(q+1) == '/' || *(q+1) == '*')) //处理*/
 		{
 			temp[0] = *q;
 			strncat(prep,temp,1);
@@ -200,6 +205,8 @@ char *ReadStr()
 	*p = '\0';
 	return Str;
 }
+
+
 
 
 
