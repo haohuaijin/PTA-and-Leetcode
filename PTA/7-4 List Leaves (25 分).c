@@ -9,12 +9,14 @@ struct Node{
     int index;
     int left,right;
 };
+
 //队列的结构
 typedef struct node *Queue;
 struct node{
     int Data[MAX];
     int front,rear;
 };
+
 //操作
 int ReadData(Tree q); //读取数据
 void FindLeaves(Tree q,int root); //找到叶子节点
