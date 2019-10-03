@@ -17,14 +17,26 @@ struct node{
     int front,rear;
 };
 
-//操作
+
+
+/**
+ * 用静态链表的方法实现树的操作时,需要注意的是:
+ * 需要在传递树时,加上一个变量,来指示树的根节点在哪里
+ */
+
+
+
+//树的操作
 int ReadData(Tree q); //读取数据
 void FindLeaves(Tree q,int root); //找到叶子节点
+void middle(Tree q,Queue p,int root); //层次遍历
+
+//队列的操作
 void AddQ(Queue q,int number); //入队
 int DeleteQ(Queue q); //出队
 int IsEmpty(Queue q); //是不是为空
 Queue CreateQ(); //创建队列
-void middle(Tree q,Queue p,int root); //层次遍历
+
 
 //全局变量
 int count = 0; 
@@ -87,7 +99,7 @@ int ReadData(Tree q)
     int n; //读入的数据
     scanf("%d",&n);
     getchar();
-    for(int i=0;i<n;i++)
+    for(int i=0;i<n;i++) //读入数据
     {
         q[i].index = i;
         scanf("%c %c",&lt,&rt);
@@ -104,7 +116,7 @@ int ReadData(Tree q)
         else q[i].right = Null;
     }
     q[n].index = -1;
-    for(int i=0;i<n;i++){
+    for(int i=0;i<n;i++){ //找到根节点
         if(check[i] == 0){
             root = i;
             break;
