@@ -19,7 +19,7 @@ void majoy(Stack p,char *s); //后缀表达式
 int main()
 {
     Stack p = CreateStack();
-    char S[21] = {0};
+    char S[50] = {0};
     scanf("%[^\n]",S);
     majoy(p,S); //得到后缀表达式
     system("pause");
@@ -45,8 +45,32 @@ void majoy(Stack p,char *S)
             }
 
         }
+        /* 可有可无，为了防止指针错误可以用这个
+        //处理开始的-5 
+        else if((*ptr == '-' || *ptr == '+') && ptr == S)
+        {
+        	ptr++;
+        	if(*(ptr-1) == '+') printf("");
+            else printf("-");
+            while((*ptr >= '1' && *ptr <= '9') || *ptr == '.'){
+                printf("%c",*ptr);
+                ptr++;
+                flag = 1;
+            }
+		}*/
         //专门处理-5这种情况
-        //else if()
+        else if((*ptr == '-' || *ptr == '+') && (*(ptr-1)>'9' || *(ptr-1)<'0') && *(ptr-1) != ')' && (*(ptr+1)>='1' && *(ptr+1)<='9'))
+        {
+            ptr++;
+            if(flag) printf(" ");
+            if(*(ptr-1) == '+') printf("");
+            else printf("-");
+            while((*ptr >= '1' && *ptr <= '9') || *ptr == '.'){
+                printf("%c",*ptr);
+                ptr++;
+                flag = 1;
+            }
+        }
         //处理左括号
         else if(*ptr == '(')
         {
@@ -113,6 +137,7 @@ void majoy(Stack p,char *S)
             }
         }
     }
+    //最后输出剩下运算符
     while(!IsEmpty(p))
     {
         printf(" %c",Pop(p));
@@ -167,6 +192,3 @@ char GetTop(Stack p)
     if(IsEmpty(p)) return '\0';
     else return p->Next->s;
 }
-
-
-
