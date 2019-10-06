@@ -35,13 +35,14 @@ int main()
         scanf("%d",&l);
         //读取到arr数据
         arr = ReadData(n,l); 
+        //每一次循环将vec1，vec2化为零
+        memset(vec1, 0, sizeof(int)*100); //memset函数,将数组元素全化为0
+        memset(vec2, 0, sizeof(int)*100); //memset函数,将数组元素全化为0
         //初始化好第一棵树
         front = CreateNode(arr[0][0]);
         for(int i=1;i<n;i++) Insert(front,arr[0][i]); //初始化第一棵树
         //前序遍历第一棵树，保存在vec1中
         m = 0;
-        memset(vec1, 0, sizeof(int)*100); //memset函数,将数组元素全化为0
-        memset(vec2, 0, sizeof(int)*100); //memset函数,将数组元素全化为0
         PreTraverse(front);
         for(int i=0;i<m;i++) vec1[i] = vec2[i]; //将前序遍历的结果都存放在vec2中。见PreTraverse函数
         //遍历剩余的树并比较
@@ -115,14 +116,4 @@ void PreTraverse(Tree q)
     if(q->left) PreTraverse(q->left);
     if(q->right) PreTraverse(q->right);
 }
-
-
-
-
-
-
-
-
-
-
 
