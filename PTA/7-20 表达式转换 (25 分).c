@@ -8,6 +8,7 @@ struct Node{
     char s;
     Stack Next;
 };
+
 //操作
 Stack CreateStack(); //初始化栈
 void Push(Stack p,char str); //入栈
