@@ -10,10 +10,7 @@ void Union(int c1,int c2){
     int root1,root2;
     root1 = Find(c1);
     root2 = Find(c2);
-    if(root1 == 0 && root2 == 0){
-        Parenet[root2]--;
-        Parenet[root1] = root2;
-    } else if(Parenet[root1] >= Parenet[root2]){
+    if(Parenet[root1] >= Parenet[root2]){
         Parenet[root2] += Parenet[root1]; 
         Parenet[root1] = root2;
     } else if(Parenet[root2] > Parenet[root1]){
