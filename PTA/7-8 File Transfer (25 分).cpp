@@ -2,9 +2,16 @@
 #include <stdlib.h>
 #define INFO -100000
 int Parenet[10001]; //储存父节点
+/* 没路径压缩
 int Find(int c1){
     for(;Parenet[c1] >= 0;c1 = Parenet[c1]);
     return c1;
+}*/
+// 进行路径压缩
+int Find(int c1){
+    if(Parenet[c1] < 0) return c1;
+    else 
+        return Parenet[c1] = Find(Parenet[c1]);
 }
 void Union(int c1,int c2){
     int root1,root2;
