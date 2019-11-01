@@ -1,7 +1,7 @@
 //邻接表储存图 -DFS
 
 void Visit(vertex V){
-    printf("正在范文顶点%d\n",V);
+    printf("正在访问顶点%d\n",V);
 }
 
 //Visited[]为全局变量,已经初始化为false
