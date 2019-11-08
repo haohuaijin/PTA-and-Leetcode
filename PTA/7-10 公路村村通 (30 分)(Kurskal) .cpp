@@ -35,7 +35,7 @@ void Kurskal(){
         root2 = Find(edge[k].e);
         if(root1 == root2){
             k++;
-            if(k == M-1)  break;
+            if(k == M)  break;
             continue;
         }
         Union(root1,root2);
