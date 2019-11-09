@@ -30,7 +30,7 @@ void Kurskal(){
     int root1,root2;
     sort(edge,edge+M,cmp);
     fill(Parenet+1,Parenet+N+1,-1);
-    while(count < N-1){
+    while(count < N-1){ //要选出的是N-1条边
         root1 = Find(edge[k].s);
         root2 = Find(edge[k].e);
         if(root1 == root2){
@@ -42,7 +42,7 @@ void Kurskal(){
         Weight += edge[k].cost;
         k++;
         count++; //记录收了,几条边
-        if(k == M)  break; //问什么这里是 k == M 而上面是 k == M - 1
+        if(k == M)  break; //这里记录的是,最多有M条边
     }
     if(count == N-1) printf("%d\n",Weight);
     else printf("-1\n");
