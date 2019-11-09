@@ -10,7 +10,7 @@ struct Edge{
     Edge(int x,int y,int z,int m=0,int n=0):s(x),e(y),cost(z),index(m),motive(n) {}
 };
 int N,M,indegree[MAX],outdegree[MAX];
-int sorted[MAX],earliest[MAX],lastliest[MAX],; 
+int sorted[MAX],earliest[MAX],lastliest[MAX]; 
 vector<Edge> E;
 vector<Edge> KeyPath;
 bool compare(Edge a,Edge b){ //对输出结果排序
@@ -88,11 +88,9 @@ int main(){
             if(earliest[i] > weight)
                 weight = earliest[i];
         printf("%d\n",weight);
-        for(int i=0;i<M;i++){
-            if(E[i].motive == 0){
+        for(int i=0;i<M;i++)
+            if(E[i].motive == 0)
                 KeyPath.push_back(E[i]);
-            }
-        }
         sort(KeyPath.begin(),KeyPath.end(),compare); //对输出结果排序
         for(auto it = KeyPath.begin();it != KeyPath.end();it++)
             printf("%d->%d\n",it->s,it->e);
