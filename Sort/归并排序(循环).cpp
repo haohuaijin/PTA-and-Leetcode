@@ -4,7 +4,6 @@
 void Merge(int A[],int TmpA[],int L,int R,int RightEnd){
     //将A[L]~A[R-1] 和 A[R]~A[RightEnd] 归并成一个有序序列
     int LeftEnd,NumElements,Tmp;
-    int i;
     LeftEnd = R - 1; //左边的终点
     Tmp = L; //起点
     NumElements = RightEnd - L + 1;
