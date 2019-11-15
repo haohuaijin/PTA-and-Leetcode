@@ -74,11 +74,11 @@ void Merge(long int *a,long int *tmpA,int L,int R,int Rightend){
     int Leftend,index;
     index = L;
     Leftend = R - 1;
-    while(L <= Leftend && R <= Rightend){
+    while(L <= Leftend && R <= Rightend){ // <=
         if(a[L] > a[R]) tmpA[index++] = a[R++];
         else tmpA[index++] = a[L++];
     }
-    while(L <= Leftend) tmpA[index++] = a[L++];
+    while(L <= Leftend) tmpA[index++] = a[L++]; // <=
     while(R <= Rightend) tmpA[index++] = a[R++];
 }
 void Merge_pass(long int *a,long int *tmpA,int N,int length){
