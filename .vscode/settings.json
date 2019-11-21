@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "string.h": "c",
+        "iostream": "cpp",
+        "string": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "ostream": "cpp",
+        "bitset": "cpp",
+        "algorithm": "cpp",
+        "type_traits": "cpp",
+        "map": "cpp",
+        "cmath": "cpp",
+        "limits": "cpp",
+        "*.tcc": "cpp"
+    }
+}
