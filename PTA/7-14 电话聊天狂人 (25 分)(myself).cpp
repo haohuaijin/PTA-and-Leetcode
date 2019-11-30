@@ -24,6 +24,7 @@ int NextPrime(int a){ //用于寻找平凡探测的数组大小,此题用不大�
 void InsertAndFind(long long int Key,long long int MAP[],int count[]){
     int i = 0;
     int addr = Hash(Key);
+    int curraddr = addr;
     if(count[addr] == -1){ //没有元素
         MAP[addr] = Key;
         count[addr] = 1;
@@ -31,13 +32,12 @@ void InsertAndFind(long long int Key,long long int MAP[],int count[]){
         if(MAP[addr] == Key) count[addr]++; //有元素,并且等于Key
         else { //有元素,并且不等于Key,要处理冲突
             while(MAP[addr] != -1 && MAP[addr] != Key){ //对应没出现过和出现过
-                //addr = (++i + addr)%MOD;
-                if(++i%2){  //平方探测
-                    addr = addr + (i+1)*(i+1)/4;
+                if(++i%2){  //Quadratic probing
+                    addr = curraddr + (i+1)*(i+1)/4;
                     if(addr >= MAX)
                         addr = addr%MOD;
                 } else {
-                    addr = addr -i*i/4;
+                    addr = curraddr -i*i/4;
                     while(addr < 0) //注意考虑
                         addr += MOD;
                 }
