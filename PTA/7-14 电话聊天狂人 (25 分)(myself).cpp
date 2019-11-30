@@ -2,10 +2,24 @@
 #include <algorithm>
 #include <cmath>
 using namespace std;
-const int MAX = 158295;
-const int MOD = 158291;
+const int MAX = 214370; //最少要大于两倍的100000,因为有两个号码
+const int MOD = 214369;
 int Hash(long long int Key){
     return Key%MOD;
+}
+int NextPrime(int a){ //用于寻找平凡探测的数组大小,此题用不大到。因为只需要定义最大的就行了
+    int prime = 0;
+    int i,j;
+    for (i = a; i < 100*a; i++){
+        for (j = 2; j < sqrt(i); j++){
+            if (i % j == 0) break;
+        }
+        if(j == sqrt(i) && (j-3)%4 == 0){
+            prime = i;
+            break;
+        }
+    }
+    return prime;
 }
 void InsertAndFind(long long int Key,long long int MAP[],int count[]){
     int i = 0;
@@ -38,9 +52,13 @@ void InsertAndFind(long long int Key,long long int MAP[],int count[]){
     }
 }
 int main(){
-    int N,Count,Max,count[MAX];
-    long long int num1,num2,MinKey,MAP[MAX];
+    int N,Count,Max;
+    long long int num1,num2,MinKey;
+    int *count; //记录出现几次
+    long long int *MAP; //记录Key值
     scanf("%d",&N);
+    count = (int*)malloc(sizeof(int)*MAX); //定义大的数组时用malloc
+    MAP = (long long int*)malloc(sizeof(long long int)*MAX);
     fill(count, count+MAX, -1); //赋初值
     fill(MAP, MAP+MAX, -1); //赋初值
     for(int i=0;i<N;i++){
