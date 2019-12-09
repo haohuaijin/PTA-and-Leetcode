@@ -49,17 +49,42 @@
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> record;
+        int Layers = 0; 
+        int countNum = 0; //this Layers Num
+        int NextNum = 0; //Next Layers NUm
+        int count = 0; //Now count Num if pop() record
+        vector<vector<int> > record;
+        vector<int> oneLine; //use the one dimension vector to initialize the two dimension vector
         queue<TreeNode*> q;
-        int count = 0;
         if(root != NULL){
             q.push(root);
-            vector[count].push_back(root->val);
+            countNum++;
         }
         while(!q.empty()){
-            TreeNode *tmp = q.top();
+            TreeNode *tmp = q.front();
+            q.pop();
+            count++;
+            oneLine.push_back(tmp->val);
+
+            if(tmp->left != NULL){
+                q.push(tmp->left);
+                NextNum++;
+            }
+            if(tmp->right != NULL){
+                q.push(tmp->right);
+                NextNum++;
+            }
             
+            if(count == countNum){ //统计下一层
+                Layers++;
+                countNum = NextNum;
+                NextNum = 0;
+                count = 0;
+                record.push_back(oneLine);
+                oneLine.clear();
+            }
         }
+        return record;
     }
 };
 // @lc code=end
