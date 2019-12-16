@@ -1,3 +1,7 @@
-# PTA-Coding
-大二，算法🚀🚀🚀。
+# PTA-and-leetcode
+
+PTA和leetcode的刷题记录。
+数据结构的实现。
+
+👾👾👾
 
