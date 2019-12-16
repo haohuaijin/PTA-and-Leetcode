@@ -43,6 +43,33 @@
 class Solution {
 public:
     vector<int> postorderTraversal(TreeNode* root) {
+        stack<TreeNode*> Stack;
+        vector<int> visit;
+        if(root == nullptr) return visit;
+        while(root != nullptr){
+            Stack.push(root);
+            visit.push_back(root->val);
+            root = root->right;
+        }
+        while(!Stack.empty()){ //leetcode官方 前-右-左 然后逆序👍 思路清奇
+            TreeNode *tmp = Stack.top();
+            Stack.pop();
+            if(tmp->left != nullptr){
+                Stack.push(tmp->left);
+                tmp = tmp->left;
+                visit.push_back(tmp->val);
+                while(tmp->right != nullptr){
+                    Stack.push(tmp->right);
+                    tmp = tmp->right;
+                    visit.push_back(tmp->val);
+                }
+            }
+        }
+        reverse(visit.begin(),visit.end());
+        return visit;
+    } 
+    /*
+    vector<int> postorderTraversal(TreeNode* root) {
         vector<int> visit;
         if(root == nullptr) return visit;
         else{
@@ -54,7 +81,7 @@ public:
         if(root->left != nullptr) poster(visit,root->left);
         if(root->right != nullptr) poster(visit,root->right);
         visit.push_back(root->val);
-    } 
+    } */
 };
 // @lc code=end
 
