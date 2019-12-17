@@ -42,6 +42,52 @@
  */
 class Solution {
 public:
+    //正规的后序遍历，耗时长
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> visit;
+        stack<TreeNode*> q;
+        unordered_set<TreeNode*> _set;
+        if(root == nullptr) return visit;
+        q.push(root);
+        while(!q.empty()){
+            auto tmp = q.top();
+            
+            bool leftVisit = true; bool rightVisit = true;
+            //right left顺序不能反
+            if(tmp->right && _set.find(tmp->right) == _set.end()){
+                leftVisit = false;
+                q.push(tmp->right);
+            }
+            if(tmp->left && _set.find(tmp->left) == _set.end()){
+                rightVisit = false;
+                q.push(tmp->left);
+            }
+        
+            if(leftVisit && rightVisit){
+                visit.push_back(tmp->val);
+                q.pop();
+                _set.insert(tmp);
+            }
+        }
+        return visit;
+    } 
+/* 谦虚遍历，逆序
+    vector<int> postorderTraversal(TreeNode* root) {
+        stack<TreeNode*> Stack;
+        vector<int> visit;
+        if(root == nullptr) return visit;
+        Stack.push(root);
+        while(!Stack.empty()){ //leetcode官方 前-右-左 然后逆序👍 思路清奇
+            TreeNode *tmp = Stack.top();
+            Stack.pop();
+            visit.push_back(tmp->val);
+            if(tmp->left != nullptr) Stack.push(tmp->left); //left right 有前后顺序
+            if(tmp->right != nullptr) Stack.push(tmp->right);
+        }
+        reverse(visit.begin(),visit.end());
+        return visit;
+    } 
+/*谦虚遍历，逆序
     vector<int> postorderTraversal(TreeNode* root) {
         stack<TreeNode*> Stack;
         vector<int> visit;
@@ -67,7 +113,7 @@ public:
         }
         reverse(visit.begin(),visit.end());
         return visit;
-    } 
+    } */
     /*
     vector<int> postorderTraversal(TreeNode* root) {
         vector<int> visit;
