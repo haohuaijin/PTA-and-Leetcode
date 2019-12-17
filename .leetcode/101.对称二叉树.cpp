@@ -17,6 +17,24 @@
 class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
+        queue<TreeNode*> q;
+        q.push(root);
+        q.push(root);
+        while(!q.empty()){
+            auto tmp1 = q.front(); q.pop();
+            auto tmp2 = q.front(); q.pop();
+            if(tmp1 == NULL && tmp2 == NULL) continue;
+            if(tmp1 == NULL || tmp2 == NULL) return false;
+            if(tmp1->val != tmp2->val) return false;
+            q.push(tmp1->left);
+            q.push(tmp2->right);
+            q.push(tmp1->right);
+            q.push(tmp2->left);
+        }
+        return true;
+    }
+/*
+    bool isSymmetric(TreeNode* root) {
         bool tmp;
         if(root == NULL) return true;
         tmp = isSymmetricTree(root->left,root->right);
@@ -32,7 +50,7 @@ public:
             if(!tmp1 || !tmp2) return false;
         }
         return true;
-    }
+    }*/
 };
 // @lc code=end
 
