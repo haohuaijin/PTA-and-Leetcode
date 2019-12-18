@@ -46,7 +46,31 @@
 class Solution {
 public:
     vector<string> binaryTreePaths(TreeNode* root) { //递归
-        
+        vector<string> re;
+        stack<TreeNode*> stack_node;
+        stack<string> stack_str;
+        if(root == nullptr) return re;
+
+        stack_node.push(root);
+        stack_str.push(to_string(root->val));
+
+        while(!stack_node.empty()){
+            TreeNode* node = stack_node.top(); stack_node.pop();
+            string str = stack_str.top(); stack_str.pop();
+
+            if((node->left == nullptr) && (node->right == nullptr)){
+                re.push_back(str);
+            }
+            if(node->left != nullptr){
+                stack_node.push(node->left);
+                stack_str.push(str+"->"+to_string(node->left->val));
+            }
+            if(node->right != nullptr){
+                stack_node.push(node->right);
+                stack_str.push(str+"->"+to_string(node->right->val));
+            }
+        }
+        return re;
     }
 /*
     vector<string> binaryTreePaths(TreeNode* root) { //递归
