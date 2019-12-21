@@ -50,7 +50,43 @@
  * };
  */
 class Solution {
-public:
+public:/*
+    vector<vector<int>> pathSum(TreeNode* root, int sum) {
+        vector<vector<int>> re;
+        if(root == nullptr) return re;
+        vector<int> path;
+        treePath(root, sum-root->val, re, path);
+        return re;
+    }*/
+
+
+    //回溯，用减法直接得到结果
+    vector<vector<int>> pathSum(TreeNode* root, int sum) {
+        vector<vector<int>> re;
+        if(root == nullptr) return re;
+        vector<int> path;
+        treePath(root, sum-root->val, re, path);
+        return re;
+    }
+    // 注意 path 引用还是没引用
+    // 引用：时间快，要写pop_back()
+    // 不引用：时间慢，因为是复制，不用写pop_back()
+    void treePath(TreeNode *root,int sum,vector<vector<int>> &re,vector<int> &path){
+        path.push_back(root->val);
+        if(sum == 0 && root->left == nullptr && root->right == nullptr)
+            re.push_back(path);
+        if(root->left != nullptr){
+            treePath(root->left, sum - root->left->val, re, path);
+            path.pop_back();
+        }
+        if(root->right != nullptr){
+            treePath(root->right, sum - root->right->val, re, path);
+            path.pop_back();
+        }
+        //path.pop_back(); 
+        //可以把前面的path.pop_back();拿到这里来
+    }
+/*  // 用递归求路径，然后求和
     vector<vector<int>> pathSum(TreeNode* root, int sum) {
         vector<vector<int>> tmp = treePath(root);
         vector<vector<int>> re;
@@ -89,6 +125,7 @@ public:
         }
         return re;
     }
+*/
 };
 // @lc code=end
 
