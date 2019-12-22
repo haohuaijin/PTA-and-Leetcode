@@ -65,9 +65,27 @@ public:
     //迭代版本
     int sumNumbers(TreeNode* root) {
         if(root == nullptr) return 0;
-        
+        int re = 0;
+        stack<TreeNode*> node; stack<int> path;
+        node.push(root); path.push(root->val);
+        while(!node.empty()){
+            TreeNode *tmp = node.top(); node.pop();
+            int num = path.top(); path.pop();
 
-        
+            if(tmp->left == nullptr && tmp->right == nullptr)
+                re += num;
+
+            if(tmp->left != nullptr){
+                int now = num * 10 + tmp->left->val;
+                node.push(tmp->left);
+                path.push(now);
+            }
+            if(tmp->right != nullptr){
+                int now = num * 10 + tmp->right->val;
+                node.push(tmp->right);
+                path.push(now);
+            }
+        }
         return re;
     }
     /*
