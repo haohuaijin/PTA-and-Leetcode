@@ -45,7 +45,31 @@
  */
 class Solution {
 public:
-    //迭代,stack
+    //BFS,queue,那一层有叶节点，那一层就是最小的深度
+    int minDepth(TreeNode* root) {
+        if(root == nullptr) return 0;
+        int re = 1, layer = 1;
+        queue<TreeNode*> q;
+        q.push(root);
+        TreeNode *last = root;
+        while(!q.empty()){
+            TreeNode *tmp = q.front(); q.pop();
+
+            if(tmp->left == nullptr && tmp->right == nullptr)
+                break;
+            
+            if(tmp->left != nullptr) q.push(tmp->left);
+            if(tmp->right != nullptr) q.push(tmp->right);
+
+            if(last == tmp){
+                last = q.back();
+                re += 1;
+            }
+        }
+        return re;
+    }
+/*
+    //迭代,stack,DFS
     int minDepth(TreeNode* root) {
         if(root == nullptr) return 0;
         int re = 99999;
@@ -70,7 +94,7 @@ public:
         return re;
     }
 /*
-    // 递归，DFS
+    // 递归,DFS
     int minDepth(TreeNode* root) {
         if(root == nullptr) return 0;
         int re = 99999;
