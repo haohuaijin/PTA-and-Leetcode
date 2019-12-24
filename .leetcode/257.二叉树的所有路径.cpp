@@ -45,7 +45,7 @@
  */
 class Solution {
 public:
-    vector<string> binaryTreePaths(TreeNode* root) { //递归
+    vector<string> binaryTreePaths(TreeNode* root) { //迭代
         vector<string> re;
         stack<TreeNode*> stack_node;
         stack<string> stack_str;
