@@ -16,6 +16,26 @@
  */
 class Solution {
 public:
+    //DFS，深度优先搜索
+    vector<vector<int>> levelOrderBottom(TreeNode* root) {
+        vector<vector<int>> res;
+        DFSOrder(root, 0, res);
+        reverse(res.begin(), res.end());
+        return res;
+    }
+    void DFSOrder(TreeNode *root,int level,vector<vector<int>> &res){
+        if(root == nullptr) return;
+        //找好level和res.size()的对应关系
+        if(level >= (int)res.size()) res.push_back({});
+
+        res[level].push_back(root->val);
+
+        DFSOrder(root->left, level + 1, res);
+        DFSOrder(root->right, level + 1, res);
+    }
+
+/*
+    //BFS，广度优先搜索
     vector<vector<int>> levelOrderBottom(TreeNode* root) {
         vector<vector<int>> record;
         vector<int> OneLine;
@@ -40,7 +60,7 @@ public:
         }
         reverse(record.begin(),record.end());
         return record;
-    }
+    }*/
 };
 // @lc code=end
 
