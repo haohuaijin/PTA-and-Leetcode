@@ -72,8 +72,8 @@ public:
             else tmp = tmp->left;
         }
         path.push(tmp);
-        tmp = root;
 
+        tmp = root;
         while(1){
             if(tmp == path.front()){
                 res = path.front();
@@ -85,7 +85,6 @@ public:
             else if(q->val < tmp->val) tmp = tmp->left;
             else break;
         }
-
         return res;
     }*/
     //迭代，利用BST的性质

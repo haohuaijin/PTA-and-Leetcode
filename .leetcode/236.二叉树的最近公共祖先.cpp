@@ -61,6 +61,7 @@
  */
 class Solution {
 public:
+    /*
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         TreeNode *res = nullptr;
         lowerCommon(root, p, q, res);
@@ -70,9 +71,6 @@ public:
         if(res != nullptr) return;
 
         if(root->left != nullptr) lowerCommon(root->left, p, q, res);
-
-        if(res != nullptr) return;
-        
         if(root->right != nullptr) lowerCommon(root->right, p, q, res);
 
         if(res != nullptr) return;
@@ -84,6 +82,38 @@ public:
         if(root == nullptr) return false;
         if(root == p) return true;
         return Find(root->left, p) || Find(root->right, p);
+    }*/
+    //父指针法，用map，set效率比较低
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root == nullptr) return root;
+        unordered_map<TreeNode*,TreeNode*> res;
+        stack<TreeNode*> s;
+        s.push(root);
+        res.insert({root, nullptr});
+
+        while(!s.empty()){
+            TreeNode *tmp = s.top(); s.pop();
+
+            if(tmp->left != nullptr){
+                res.insert({tmp->left, tmp});
+                s.push(tmp->left);
+            }
+            if(tmp->right != nullptr){
+                res.insert({tmp->right, tmp});
+                s.push(tmp->right);
+            }
+        }
+
+        unordered_set<TreeNode*> ancestor;
+        while(p != nullptr){
+            ancestor.insert(p);
+            p = res[p];
+        }
+        TreeNode *tmp = q;
+        while(ancestor.find(tmp) == ancestor.end()){
+            tmp = res[tmp];
+        }
+        return tmp;
     }
 };
 // @lc code=end
