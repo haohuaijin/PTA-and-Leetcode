@@ -58,7 +58,21 @@
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
+        int res, count = 0;
+        DFS(root, res, count, k);
+        return res;
+    }
+    void DFS(TreeNode *root, int &num, int &count,int k){
+        if(count == k) return;
         
+        if(root->left != nullptr) DFS(root->left, num, count, k);
+        
+        if(count == k - 1){
+            num = root->val;
+        }
+        count++;
+        
+        if(root->right != nullptr) DFS(root->right, num, count, k);
     }
 };
 // @lc code=end
