@@ -50,16 +50,7 @@
  * };
  */
 class Solution {
-public:/*
-    vector<vector<int>> pathSum(TreeNode* root, int sum) {
-        vector<vector<int>> re;
-        if(root == nullptr) return re;
-        vector<int> path;
-        treePath(root, sum-root->val, re, path);
-        return re;
-    }*/
-
-
+public:
     //回溯，用减法直接得到结果
     vector<vector<int>> pathSum(TreeNode* root, int sum) {
         vector<vector<int>> re;
