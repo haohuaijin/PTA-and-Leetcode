@@ -74,7 +74,7 @@ public:
         }
         return count;
     }*/
-    //利用map来储存inorder里面值与下标的关系，来加速
+    //利用map来储存inorder里面值与下标的关系，加速(代替Find)
     //题目的关键：找好下标的对应关系
     unordered_map<int, int> Map;
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
