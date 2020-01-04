@@ -82,7 +82,21 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
-        
+        if(root == nullptr) return root;
+        queue<Node*> q;
+        q.push(root);
+        Node *last = root;
+        while(!q.empty()){
+            Node *tmp = q.front(); q.pop();
+            if(tmp->left != nullptr) q.push(tmp->left);
+            if(tmp->right != nullptr) q.push(tmp->right);
+            if(last == tmp){
+                last = q.back();
+            } else {
+                tmp->next = q.front();
+            }
+        }
+        return root;
     }
 };
 // @lc code=end
