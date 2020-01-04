@@ -81,6 +81,8 @@ public:
 */
 class Solution {
 public:
+/*
+    //BFS 迭代
     Node* connect(Node* root) {
         if(root == nullptr) return root;
         queue<Node*> q;
@@ -95,6 +97,27 @@ public:
             } else {
                 tmp->next = q.front();
             }
+        }
+        return root;
+    }*/
+    //妙，主要是如何记录下一层，和遍历这一层
+    Node* connect(Node* root) {
+        Node *cur = root;
+        while(cur != nullptr){
+            Node *Next = new Node();
+            Node *tail = Next;
+            while(cur != nullptr){
+                if(cur->left != nullptr){
+                    tail->next = cur->left;
+                    tail = tail->next;
+                }
+                if(cur->right != nullptr){
+                    tail->next = cur->right;
+                    tail = tail->next;
+                }
+                cur = cur->next;
+            }
+            cur = Next->next;
         }
         return root;
     }
