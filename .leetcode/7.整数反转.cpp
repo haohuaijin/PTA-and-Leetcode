@@ -43,6 +43,7 @@
 // @lc code=start
 class Solution {
 public:
+    /* myself
     int reverse(int x) {
         if(x <= INT_MIN || x > INT_MAX) return 0;
         bool flag = true;
@@ -58,6 +59,18 @@ public:
         if(!flag) num = -num;
         if((num <= INT_MIN || num > INT_MAX)) return 0;
         return (int)num;
+    }*/
+    // 比较优美，不过效率不高
+    int reverse(int x) {
+        int rev = 0;
+        while(x != 0){
+            int pop = x % 10;
+            x /= 10;
+            if(rev > INT_MAX/10 || (rev == INT_MAX && pop > 7)) return 0;
+            if(rev < INT_MIN/10 || (rev == INT_MIN && pop < -8)) return 0;
+            rev = rev * 10 + pop;
+        }
+        return rev;
     }
 };
 // @lc code=end
