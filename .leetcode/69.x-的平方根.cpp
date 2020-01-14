@@ -38,6 +38,7 @@
 // @lc code=start
 class Solution {
 public:
+    /*
     //简单的想法
     int mySqrt(int x) {
         long i;
@@ -47,6 +48,13 @@ public:
                 break;
         }
         return i-1;
+    }*/
+    int mySqrt(int x) {
+        long a = x;
+        while(a * a > x){
+            a = (a + x / a) / 2;
+        }
+        return (int)a;
     }
 };
 // @lc code=end
