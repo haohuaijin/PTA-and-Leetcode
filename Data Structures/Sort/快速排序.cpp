@@ -26,20 +26,21 @@ long int Median3(long int *A,int Left,int Right){
 }
 void QSort(long int *a,int Left,int Right){
     long int Pivot;
-    int Low,High,Cutoff = 100;
+    int Low,High,Cutoff = 1;
     if(Cutoff <= Right-Left){ //如果序列元素多，进入快排
-        Pivot = Median3(a,Left,Right); //选基准
+        //Pivot = Median3(a,Left,Right); //选基准
+        Pivot = a[Left];
         Low = Left;
-        High = Right - 1; //注意
+        High = Right + 1; //注意
         while(1){ //序列中比基准小的放在左边,大的右边
-            while(a[++Low] < Pivot);
+            while(a[++Low] < Pivot);// if(Low == Right) break;
             while(a[--High] > Pivot);
             if(Low < High) Swap(a[Low],a[High]);
             else break;
         }
-        Swap(a[Low],a[Right-1]); //将基准放在正确的位置
-        QSort(a,Left,Low-1); //递归解决左边
-        QSort(a,Low+1,Right); //递归解决右边
+        Swap(a[Left],a[High]); //将基准放在正确的位置
+        QSort(a,Left,High-1); //递归解决左边
+        QSort(a,High+1,Right); //递归解决右边
     }
     else Insert_Sort(a+Left,Right-Left+1);
 }
@@ -47,16 +48,18 @@ void Quick_Sort(long int *a,int N){
     QSort(a,0,N-1);
 }
 int main(){
-    int N;
-    long int a[100010];
-    scanf("%d",&N);
-    for(int i=0;i<N;i++)
-        scanf("%ld",&a[i]);
+    //int N;
+    //long int a[100010];
+    //scanf("%d",&N);
+    //for(int i=0;i<N;i++)
+    //    scanf("%ld",&a[i]);
+    long int a[] = {9,8,7,6,5,4,3,2,1};
+    int N = 9;
     Quick_Sort(a,N);
     cout << a[0];
     for(int i=1;i<N;i++)
         cout << ' ' << a[i];
     cout << endl;
-    system("pause"); 
+    //system("pause"); 
     return 0;
 }

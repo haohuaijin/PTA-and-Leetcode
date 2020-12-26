@@ -14,14 +14,13 @@ void Merge(int A[],int TmpA[],int L,int R,int RightEnd){
             TmpA[Tmp++] = A[L++]; //将左边的元素复制到TmpA
         else
             TmpA[Tmp++] = A[R++]; //将右边的元素复制到TmpA
-        }
     }
     while(L <= LeftEnd)
         TmpA[Tmp++] = A[L++]; // 直接复制剩下的元素
     while(R <= RightEnd)
-        Tmp[Tmp++] = A[R++]; // 直接复制剩下的元素
+        TmpA[Tmp++] = A[R++]; // 直接复制剩下的元素
         
-    for(i = 0; i < NumElements; i++,RightEnd--){
+    for(i = 0; i < NumElements; i++,RightEnd--)
         A[RightEnd] = TmpA[RightEnd]; //将有序部分复制回A[]
 }
 

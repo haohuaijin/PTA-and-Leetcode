@@ -13,12 +13,11 @@ void Merge(int A[],int TmpA[],int L,int R,int RightEnd){
             TmpA[Tmp++] = A[L++]; //将左边的元素复制到TmpA
         else
             TmpA[Tmp++] = A[R++]; //将右边的元素复制到TmpA
-        }
     }
     while(L <= LeftEnd)
         TmpA[Tmp++] = A[L++]; // 直接复制剩下的元素
     while(R <= RightEnd)
-        Tmp[Tmp++] = A[R++]; // 直接复制剩下的元素
+        TmpA[Tmp++] = A[R++]; // 直接复制剩下的元素
 }
 
 //Length = 当前有序子序列的长度
@@ -33,13 +32,13 @@ void Merge_pass(int A[],int TmpA[],int N,int length){
 }
 
 void sorted(int A[],int N){
-    int Length;
+    int length;
     int *TmpA;
     length = 1; //初始化子序列的长度
     TmpA = (int*)malloc(sizeof(int)*N);
     if(TmpA != NULL){
         while(length < N){
-            Merge_pass(A, TmpA, N, Length);
+            Merge_pass(A, TmpA, N, length);
             length *= 2;
             Merge_pass(TmpA, A, N, length);
             length *= 2; 
