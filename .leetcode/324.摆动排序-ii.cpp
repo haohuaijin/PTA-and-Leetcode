@@ -64,7 +64,7 @@ public:
         nth_element(nums.begin(), midptr, nums.end());
         int mid = *midptr;
 
-        // Index-rewiring.
+        //使用虚拟地址
         #define A(i) nums[(1+2*(i)) % (n|1)]
 
         // 3-way-partition-to-wiggly in O(n) time with O(1) space.
