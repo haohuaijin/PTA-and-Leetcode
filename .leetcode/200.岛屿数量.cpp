@@ -59,7 +59,6 @@
  */
 
 // @lc code=start
-/* 
 // leetcode DFS
 class Solution {
 private:
@@ -91,7 +90,6 @@ public:
         return num_islands;
     }
 };
-*/
 /*
 // leetcode BFS
 class Solution {
@@ -138,6 +136,7 @@ public:
     }
 };
 */
+/*
 // leetcode 并查集
 class UnionFind {
 public:
@@ -150,11 +149,10 @@ public:
                 if (grid[i][j] == '1') {
                     parent.push_back(i * n + j);
                     ++count;
-                }
-                else {
+                } else {
                     parent.push_back(-1);
                 }
-                rank.push_back(0);
+                rank.push_back(1);
             }
         }
     }
@@ -174,7 +172,7 @@ public:
                 swap(rootx, rooty);
             }
             parent[rooty] = rootx;
-            if (rank[rootx] == rank[rooty]) rank[rootx] += 1;
+            rank[rootx] += rank[rooty]; //这样比较合适
             --count;
         }
     }
@@ -201,10 +199,11 @@ public:
         for (int r = 0; r < nr; ++r) {
             for (int c = 0; c < nc; ++c) {
                 if (grid[r][c] == '1') {
-                    grid[r][c] = '0';
-                    if (r - 1 >= 0 && grid[r-1][c] == '1') uf.unite(r * nc + c, (r-1) * nc + c);
+                    // grid[r][c] = '0';
+                    // 可以去掉向上和左的合并
+                    // if (r - 1 >= 0 && grid[r-1][c] == '1') uf.unite(r * nc + c, (r-1) * nc + c);
                     if (r + 1 < nr && grid[r+1][c] == '1') uf.unite(r * nc + c, (r+1) * nc + c);
-                    if (c - 1 >= 0 && grid[r][c-1] == '1') uf.unite(r * nc + c, r * nc + c - 1);
+                    // if (c - 1 >= 0 && grid[r][c-1] == '1') uf.unite(r * nc + c, r * nc + c - 1);
                     if (c + 1 < nc && grid[r][c+1] == '1') uf.unite(r * nc + c, r * nc + c + 1);
                 }
             }
@@ -213,5 +212,6 @@ public:
         return uf.getCount();
     }
 };
+*/
 // @lc code=end
 
