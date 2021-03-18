@@ -1,25 +1,23 @@
 /*
- * @lc app=leetcode.cn id=51 lang=cpp
+ * @lc app=leetcode.cn id=52 lang=cpp
  *
- * [51] N 皇后
+ * [52] N皇后 II
  *
- * https://leetcode-cn.com/problems/n-queens/description/
+ * https://leetcode-cn.com/problems/n-queens-ii/description/
  *
  * algorithms
- * Hard (73.71%)
- * Likes:    765
+ * Hard (82.19%)
+ * Likes:    239
  * Dislikes: 0
- * Total Accepted:    105.1K
- * Total Submissions: 142.6K
+ * Total Accepted:    57.3K
+ * Total Submissions: 69.7K
  * Testcase Example:  '4'
  *
  * n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
  * 
- * 给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。
+ * 给你一个整数 n ，返回 n 皇后问题 不同的解决方案的数量。
  * 
  * 
- * 
- * 每一种解法包含一个不同的 n 皇后问题 的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。
  * 
  * 
  * 
@@ -27,7 +25,7 @@
  * 
  * 
  * 输入：n = 4
- * 输出：[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+ * 输出：2
  * 解释：如上图所示，4 皇后问题存在两个不同的解法。
  * 
  * 
@@ -35,7 +33,7 @@
  * 
  * 
  * 输入：n = 1
- * 输出：[["Q"]]
+ * 输出：1
  * 
  * 
  * 
@@ -52,25 +50,20 @@
  */
 
 // @lc code=start
-class Solution {
+class Solution{
 public:
     int N;
     int queenPos[10];
-    vector<vector<string>> solveNQueens(int n) {
-        vector<vector<string>> ret;
+    int totalNQueens(int n){
+        int ret = 0;
         N = n;
         NQueens(ret, 0);
         return ret;
     }
-    void NQueens(vector<vector<string>> &ret, int k){
+    void NQueens(int &ret, int k){
         int i;
         if(k == N){
-            vector<string> temp;
-            for(i = 0; i < N; i++){
-                string str = string(queenPos[i], '.') + 'Q' + string(N-queenPos[i]-1, '.');
-                temp.emplace_back(str);
-            }   
-            ret.emplace_back(temp);
+            ret += 1;
             return;
         }
         for(i=0; i<N; i++){
@@ -87,4 +80,3 @@ public:
     }
 };
 // @lc code=end
-
