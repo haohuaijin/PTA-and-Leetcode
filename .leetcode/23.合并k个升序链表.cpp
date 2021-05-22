@@ -71,11 +71,63 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+//分治的方法
 class Solution {
 public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2){
+        if(l1 == nullptr || l2 == nullptr) return l1 ? l1 : l2; 
+        ListNode dummy; //使用局部变量代替new，可以使内存排名从5%到98%。
+        ListNode* r = &dummy;
+        while(l1 && l2){
+            if(l1->val > l2->val){
+                r->next = l2; l2 = l2->next;
+            } else {
+                r->next = l1; l1 = l1->next;
+            }
+            r = r->next;
+        }
+        r->next = l1 ? l1 : l2;
+        return dummy.next;
+    }
+    ListNode* merge(vector<ListNode*>& lists, int left, int right){
+        if(left == right) return lists[left];
+        if(left > right) return nullptr;
+        int mid = (left + right) / 2;
+        return mergeTwoLists(merge(lists, left, mid), merge(lists, mid+1, right));
+    }
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-
+        return merge(lists, 0, lists.size() - 1);
     }
 };
+/*
+// 优先队列的方法
+// link: https://leetcode-cn.com/problems/merge-k-sorted-lists/solution/he-bing-kge-pai-xu-lian-biao-by-leetcode-solutio-2/
+class Solution {
+public:
+    struct Status {
+        int val;
+        ListNode *ptr;
+        bool operator < (const Status &rhs) const {
+            return val > rhs.val;
+        }
+    };
+
+    priority_queue <Status> q;
+
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        for (auto node: lists) {
+            if (node) q.push({node->val, node});
+        }
+        ListNode head, *tail = &head;
+        while (!q.empty()) {
+            auto f = q.top(); q.pop();
+            tail->next = f.ptr; 
+            tail = tail->next;
+            if (f.ptr->next) q.push({f.ptr->next->val, f.ptr->next});
+        }
+        return head.next;
+    }
+};
+*/
 // @lc code=end
 
