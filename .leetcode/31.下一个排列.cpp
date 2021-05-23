@@ -63,6 +63,7 @@
 // @lc code=start
 // leetcode solution
 // link: https://leetcode-cn.com/problems/next-permutation/solution/xia-yi-ge-pai-lie-by-leetcode-solution/
+// 理解解题的步骤，以及算法的合理性。
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
