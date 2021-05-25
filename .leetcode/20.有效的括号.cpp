@@ -96,7 +96,7 @@ public:
     }
 };
 */
-// 使用ASCII可以做进一步的优化
+// 使用ASCII可以做进一步的优化, 不过可读性比较差
 class Solution {
 public:
     bool isValid(string s) {
