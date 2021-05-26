@@ -47,7 +47,7 @@
  */
 
 // @lc code=start
-// leetcode solutions
+// 栈
 class Solution{
 public:
     int trap(vector<int>& height){
@@ -69,4 +69,3 @@ public:
     }
 };
 // @lc code=end
-
