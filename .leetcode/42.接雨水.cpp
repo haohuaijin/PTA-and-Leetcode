@@ -55,15 +55,16 @@ public:
         stack<int> st;
         while (current < height.size()) {
             while (!st.empty() && height[current] > height[st.top()]) {
-                int top = st.top();
+                int top = st.top(); 
                 st.pop();
                 if (st.empty())
                     break;
-                int distance = current - st.top() - 1;
+                int distance = current - st.top() - 1; //此时的栈顶是top的做边界(在栈里的元素，从栈底到栈顶递减)
                 int bounded_height = min(height[current], height[st.top()]) - height[top];
                 ans += distance * bounded_height;
             }
-            st.push(current++);
+            st.push(current);
+            current++;
         }
         return ans;
     }
