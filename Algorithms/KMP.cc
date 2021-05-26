@@ -20,8 +20,8 @@ void getNext(const string& str, vector<int>& next){
     int strStr(string haystack, string needle) {
         int i = 0, j = 0;
         int len1 = haystack.size(), len2 = needle.size();
-        if(len1 == 0 || len2 == 0) return 0;
-        vector<int> next(len2, 0);
+        if(len2 == 0) return 0;
+        vector<int> next(len2+1);
         getNext(needle, next);
 
         while(i < len1 && j < len2){
