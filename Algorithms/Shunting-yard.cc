@@ -18,6 +18,14 @@ string shunting_yard(string str){
     string ret;
     stack<char> stack;
     int len = str.size();
+    /*
+        1. 遇到操作数输出;
+        2. 遇到左括号入栈;
+        3. 遇到右括号则出栈，直至左括号出栈，并把出栈的内容输出;
+        4. 如果当前操作符的优先级大于栈顶优先级，入栈;
+        5. 当前操作符优先级小于等于栈顶优先级，则一直出栈(直到栈空或遇到左括号)，
+            并把出栈内容输出，然后当前操作符入栈;
+    */
     for(int i=0; i<len; ++i){
         if(str[i] >= 'a' && str[i] <= 'z'){
             ret += str[i];
