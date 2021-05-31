@@ -65,7 +65,8 @@ public:
         return 0;
     }
 };
-    */
+*/
+/*
 class Solution{
 public:
     int findPeakElement(vector<int>& nums) {
@@ -80,6 +81,21 @@ public:
         else if(mid > 0 && arr[mid - 1] < arr[mid])
             return localMinUtil(arr, low, mid - 1, n);
         return localMinUtil(arr, mid + 1, high, n);
+    }
+};
+*/
+class Solution{
+public:
+    int findPeakElement(vector<int>& nums) {
+        int l = 0, r = nums.size() - 1;
+        while (l < r) {
+            int mid = (l + r) / 2;
+            if (nums[mid] > nums[mid + 1])
+                r = mid;
+            else
+                l = mid + 1;
+        }
+        return l;
     }
 };
 // @lc code=end
