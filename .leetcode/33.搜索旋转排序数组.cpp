@@ -62,24 +62,55 @@
  */
 
 // @lc code=start
+/*
+将数组一分为二，其中一定有一个是有序的，另一个可能是有序，也能是部分有序。
+此时有序部分用二分法查找。无序部分再一分为二，其中一个一定有序，另一个可能有序，可能无序。就这样循环. 
+*/
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        
-        return 0;
-    }
-    int findPeakElement(vector<int>& nums) {
         int l = 0, r = nums.size() - 1;
-        while (l < r) {
+        while(l <= r){
             int mid = (l + r) / 2;
-            if (nums[mid] > nums[mid + 1])
-                r = mid;
-            else
-                l = mid + 1;
-        }
-        return l;
+            if(nums[mid] == target) return mid;
+            if(nums[mid] >= nums[0]){
+                if(target >= nums[0] && target < nums[mid])
+                    r = mid-1;
+                else 
+                    l = mid+1;
+            } else {
+                if(target <= nums[nums.size()-1] && target > nums[mid])
+                    l = mid+1;
+                else 
+                    r = mid-1;
+            }
+        } 
+        return -1;
     }
 };
-// 4,5,6,7,0,1,2
+/*
+// link: https://leetcode.com/problems/search-in-rotated-sorted-array/discuss/14435/Clever-idea-making-it-simple/?utm_source=LCUS&utm_medium=ip_redirect&utm_campaign=transfer2china
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int lo = 0, hi = nums.size();
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+
+            double num = (nums[mid] < nums[0]) == (target < nums[0]) //nums[mid]和target是否位于相同的序列中
+                       ? nums[mid]
+                       : target < nums[0] ? -INFINITY : INFINITY;
+
+            if (num < target)
+                lo = mid+1;
+            else if (num > target)
+                hi = mid;
+            else
+                return mid;
+        }
+        return -1;
+    }
+};
+*/
 // @lc code=end
 
