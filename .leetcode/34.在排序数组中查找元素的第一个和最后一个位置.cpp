@@ -60,7 +60,28 @@
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-
+        vector<int> ret{-1, -1};
+        if(nums.size() == 0) return ret;
+        int l = 0, r = nums.size()-1;
+        int mid;
+        while(r >= l){
+            mid = (l + r) / 2;
+            if(nums[mid] == target) break;
+            if(nums[mid] > target)
+                r = mid-1;
+            else 
+                l = mid+1;
+        }
+        l = mid; r = mid;
+        while(l > 0 && nums[l-1] == target) 
+            --l;
+        while(r < nums.size()-1 && nums[r+1] == target)
+            ++r;
+        if(nums[mid] == target){
+            ret[0] = l;
+            ret[1] = r;
+        }
+        return ret;
     }
 };
 // @lc code=end
