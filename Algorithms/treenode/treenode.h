@@ -3,8 +3,9 @@
 
 typedef struct TreeNode{
     int val;
-    int flag;
+    int flag; // use in post order traversal
     struct TreeNode *left, *right;
+    int ltag, rtag; // use in threaded bianry tree
 }TreeNode;
 
 TreeNode *CreateNode(int val){

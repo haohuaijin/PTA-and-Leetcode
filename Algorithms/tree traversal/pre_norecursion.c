@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "treenode.h"
+#include "../treenode/treenode.h"
 
 void preorder(TreeNode* root){
     TreeNode **st = (TreeNode**)malloc(sizeof(TreeNode*)*20); //存放TreeNode指针的数组

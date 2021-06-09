@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "treenode.h"
+#include "../treenode/treenode.h"
 
 // 记录前一个节点的
 void postorder(TreeNode *root){

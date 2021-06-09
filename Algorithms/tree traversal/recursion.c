@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "treenode.h"
+#include "../treenode/treenode.h"
 
 void preorder(TreeNode* root){
     if(root){
