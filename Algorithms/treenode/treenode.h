@@ -11,12 +11,14 @@ typedef struct TreeNode{
 TreeNode *CreateNode(int val){
     TreeNode* ret = (TreeNode*)malloc((sizeof(TreeNode)));
     ret->val = val;
+    ret->ltag = 0;
+    ret->rtag = 0; 
     return ret;
 }
 void DeleteTree(TreeNode* root){
     if(root){
-        DeleteTree(root->left);
-        DeleteTree(root->right);
+        if(root->ltag == 0) DeleteTree(root->left);
+        if(root->rtag == 0) DeleteTree(root->right);
         free(root);
     }
 }

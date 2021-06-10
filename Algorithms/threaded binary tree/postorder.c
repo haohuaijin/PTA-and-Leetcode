@@ -3,7 +3,7 @@
 #include "../treenode/treenode.h"
 
 /*********************************************************************************
-                           创建先序线索二叉树
+                           创建后续线索二叉树
 **********************************************************************************/ 
 TreeNode *pre = NULL;
 void thread_visit(TreeNode *root){
@@ -17,39 +17,39 @@ void thread_visit(TreeNode *root){
     }
     pre = root;
 }
-void PreThread(TreeNode *root){
+void PostThread(TreeNode *root){
     if(root != NULL){
+        PostThread(root->left);
+        PostThread(root->right);
         thread_visit(root);
-        if(root->ltag == 0) //防止出现回路
-            PreThread(root->left);
-        PreThread(root->right);
     }
 }
-void CreatePreThread(TreeNode *root){
+void CreatePostThread(TreeNode *root){
     pre = NULL;
     if(root != NULL){
-        PreThread(root);
+        PostThread(root);
         if(pre->right == NULL)
             pre->rtag = 1;
     }
 }
 
 /*********************************************************************************
-                               先序线索二叉树查找先序后继
+                               后序线索二叉树查找后序前驱
 **********************************************************************************/
-// 查找先序后继
-TreeNode *nextnode(TreeNode *root){
-    if(root->rtag == 1){
-        return root->right;
+// 查找后序前驱
+TreeNode *prenode(TreeNode *root){
+    if(root->ltag == 1){
+        return root->left;
     } else {
-        if(root->ltag == 0)
-            return root->left;
-        else 
+        if(root->rtag == 0)
             return root->right;
+        else 
+            return root->left;
     }
 }
-void Preorder(TreeNode *root){
-    for(TreeNode *p = root; p != NULL; p = nextnode(p))
+// 使用后序线索二叉树实现逆序后序遍历
+void reversePostorder(TreeNode *root){
+    for(TreeNode *p = root; p != NULL; p = prenode(p))
         visit(p);
 }
 
@@ -70,10 +70,10 @@ int main(){
     root->left->right = CreateNode(4);
     root->right->left = CreateNode(5);
     root->right->right = CreateNode(6);
-    CreatePreThread(root);
+    CreatePostThread(root);
 
-    printf("Preorder traversal:");
-    Preorder(root);
+    printf("Postorder traversal:");
+    reversePostorder(root);
     printf("\n");
 
     DeleteTree(root);
