@@ -10,6 +10,8 @@ typedef struct TreeNode{
 
 TreeNode *CreateNode(int val){
     TreeNode* ret = (TreeNode*)malloc((sizeof(TreeNode)));
+    ret->left = NULL;
+    ret->right = NULL;
     ret->val = val;
     ret->ltag = 0;
     ret->rtag = 0; 
