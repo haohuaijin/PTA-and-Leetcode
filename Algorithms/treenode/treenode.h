@@ -17,12 +17,20 @@ TreeNode *CreateNode(int val){
     ret->rtag = 0; 
     return ret;
 }
+
 void DeleteTree(TreeNode* root){
     if(root){
         if(root->ltag == 0) DeleteTree(root->left);
         if(root->rtag == 0) DeleteTree(root->right);
         free(root);
     }
+}
+
+int getHeight(TreeNode *root) {
+    if(root == NULL) return 0;
+	int left = getHeight(root->left);
+	int right = getHeight(root->right);
+    return (left > right ? left : right) + 1;
 }
 
 void visit(TreeNode *root){
