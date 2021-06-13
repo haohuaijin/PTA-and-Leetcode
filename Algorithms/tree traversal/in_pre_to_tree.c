@@ -8,6 +8,9 @@ TreeNode* helper(int *inorder, int *preorder, int l1, int r1, int l2, int r2){
     if(l1 > r1) return NULL;
     int index;
     // find the root in inorder
+    /**********************************************************
+     we can use hash map to fastly to find the index in inorder
+     **********************************************************/
     for(index=l1; index<=r1; ++index)
         if(inorder[index] == preorder[l2])
             break;
