@@ -37,4 +37,25 @@ void visit(TreeNode *root){
     printf("%4d", root->val);
 }
 
+void preorder_traversal(TreeNode* root){
+    if(root){
+        visit(root);
+        preorder_traversal(root->left);
+        preorder_traversal(root->right);
+    }
+}
+void inorder_traversal(TreeNode* root){
+    if(root){
+        inorder_traversal(root->left);
+        visit(root); 
+        inorder_traversal(root->right);
+    }
+}
+void postorder_traversal(TreeNode* root){
+    if(root){
+        postorder_traversal(root->left);
+        postorder_traversal(root->right);
+        visit(root);
+    }
+}
 #endif
