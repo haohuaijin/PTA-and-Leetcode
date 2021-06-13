@@ -5,16 +5,16 @@
 
 TreeNode* helper(int *inorder, int *postorder, int l1, int r1, int l2, int r2){
     if(l1 > r1) return NULL;
-    int i;
+    int index;
     // find the root in inorder
-    for(i=l1; i<=r1; ++i)
-        if(inorder[i] == postorder[r2])
+    for(index=l1; index<=r1; ++index)
+        if(inorder[index] == postorder[r2])
             break;
     TreeNode *t = CreateNode(postorder[r2]);
     // construct the left subtree
-    t->left = helper(inorder, postorder, l1, i-1, l2, l2+i-l1-1);
+    t->left = helper(inorder, postorder, l1, index-1, l2, l2+index-l1-1);
     // construct the right subtree
-    t->right = helper(inorder, postorder, i+1, r1, l2+i-l1, r2-1);
+    t->right = helper(inorder, postorder, index+1, r1, l2+index-l1, r2-1);
     return t;
 }
 TreeNode* buildTree(int* inorder, int* postorder, int len) {
