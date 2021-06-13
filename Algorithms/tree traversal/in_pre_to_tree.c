@@ -26,13 +26,7 @@ TreeNode* helper(int *inorder, int *preorder, int l1, int r1, int l2, int r2){
 TreeNode* buildTree(int* inorder, int* preorder, int len) {
     return helper(inorder, preorder, 0, len-1, 0, len-1);
 }
-void preorder_traversal(TreeNode* root){
-    if(root){
-        visit(root);
-        preorder_traversal(root->left);
-        preorder_traversal(root->right);
-    }
-}
+
 int main(){
     /*************************
          1

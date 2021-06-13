@@ -23,13 +23,7 @@ TreeNode* helper(int *inorder, int *postorder, int l1, int r1, int l2, int r2){
 TreeNode* buildTree(int* inorder, int* postorder, int len) {
     return helper(inorder, postorder, 0, len-1, 0, len-1);
 }
-void preorder(TreeNode* root){
-    if(root){
-        visit(root);
-        preorder(root->left);
-        preorder(root->right);
-    }
-}
+
 int main(){
     /*
          1
@@ -43,7 +37,7 @@ int main(){
     TreeNode *root = buildTree(inorder, postorder, 6);
 
     printf("Preorder traversal: ");
-    preorder(root);
+    preorder_traversal(root);
     printf("\n");
 
     DeleteTree(root);
