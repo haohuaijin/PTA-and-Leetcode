@@ -1,6 +1,7 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
+#define INFINITE 0x7fffffff
 //邻接矩阵表示法
 typedef struct Graph{
 	int nv; //顶点个数
@@ -17,6 +18,9 @@ Graph *CreateGraph(int Nv, int Ne){
 	g->edge = (int**)malloc(sizeof(int*)*Nv);
 	for(int i=0; i<Nv; ++i)
 		g->edge[i] = (int*)malloc(sizeof(int)*Nv);
+	for(int i=0; i<g->nv; ++i){
+		g->vex[i] = i;
+	}
 	return g;
 }
 
